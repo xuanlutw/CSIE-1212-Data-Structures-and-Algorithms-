@@ -78,7 +78,7 @@ char value_table(u_long table) {
     }
     if (result == 2) return COLOR(table);
     if (result == 1) return 0;
-    return COLOR(table)? 2: 1;
+    return (COLOR(table) == 1)? 2: 1;
 }
 
 u_long get_table() {
