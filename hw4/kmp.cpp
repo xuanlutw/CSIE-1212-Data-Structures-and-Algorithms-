@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #define NUM_T 10010
-
+ 
 /* list_string */
 #define NUM_DATA 128
 #define AT_FRONT 0
@@ -14,17 +14,17 @@ typedef struct ls_item {
     short begin;
     short end;
 } ls_item;
-
+ 
 typedef struct ls {
     ls_item* head;
     ls_item* tail;
 } ls;
-
+ 
 typedef struct ls_iterator {
     ls_item* now_item;
     short now_num;
 } ls_iterator;
-
+ 
 ls_item* ls_item_init(int where) {
     ls_item* ret = (ls_item*)malloc(sizeof(ls_item));
     if (where == AT_FRONT) {
@@ -39,13 +39,13 @@ ls_item* ls_item_init(int where) {
     ret->pre = NULL;
     return ret;
 }
-
+ 
 ls* ls_init() {
     ls* ret = (ls*)malloc(sizeof(ls));
     ret-> tail = ret->head = ls_item_init(AT_FRONT);
     return ret;
 }
-
+ 
 void ls_destroy(ls* src) {
     ls_item* tmp;
     while (src->head) {
@@ -56,7 +56,7 @@ void ls_destroy(ls* src) {
     free(src);
     return;
 }
-
+ 
 void ls_push_back(ls* src, char c) {
     ls_item* tar = src->tail;
     if (tar->end != NUM_DATA) {
@@ -72,7 +72,7 @@ void ls_push_back(ls* src, char c) {
     }
     return;
 }
-
+ 
 void ls_push_front(ls* src, char c) {
     ls_item* tar = src->head;
     if (tar->begin != 0) {
@@ -88,18 +88,18 @@ void ls_push_front(ls* src, char c) {
     }
     return;
 }
-
+ 
 ls_iterator* ls_iterator_init(ls* src) {
     ls_iterator* ret = (ls_iterator*)malloc(sizeof(ls_iterator));
     ret->now_item = src->head;
     ret->now_num = src->head->begin;
     return ret;
 }
-
+ 
 inline void ls_iterator_destroy(ls_iterator* iter) {
     free(iter);
 }
-
+ 
 char ls_vist(ls_iterator* src) {
     if (src->now_num != src->now_item->end)
         return src->now_item->data[src->now_num++];
@@ -109,7 +109,7 @@ char ls_vist(ls_iterator* src) {
     src->now_num = src->now_item->begin;
     return ls_vist(src);
 }
-
+ 
 /*kmp*/
 int* kmp_pre(char* t, int t_len) {
     int* pre = (int*)malloc(sizeof(int) * (strlen(t) + 1));
@@ -124,7 +124,7 @@ int* kmp_pre(char* t, int t_len) {
     }
     return pre;
 }
-
+ 
 int kmp(ls* str, char* t) {
     int t_len = strlen(t);
     int* pre = kmp_pre(t, t_len);
@@ -144,7 +144,7 @@ int kmp(ls* str, char* t) {
     free(pre);
     return ans;
 }
-
+ 
 int main() {
     char c, t[NUM_T];
     ls* str = ls_init();
@@ -180,3 +180,4 @@ int main() {
     printf("\n");
     */
 }
+
